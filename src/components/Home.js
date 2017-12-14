@@ -59,7 +59,7 @@ export default class Home extends Component {
 	}
   }
   render () {
-    return !this.state.loaded ? <h2>Loading...</h2> : ( 
+    return !this.state.loaded ? <h2>lindako kattono nyo...</h2> : ( 
     <div>
       <input type="text" onChange={(e)=>this.search(e)} className="form-control" placeholder="Search here"/>
       <br />
@@ -73,14 +73,14 @@ export default class Home extends Component {
 				    <div className="caption">
 				        <h3>{item.name}</h3>
 				        <p>Description about movie</p>
-				        <p><a onClick={()=>this.props.history.push({pathname: '/movie',state: {id: item.id,name: item.name} }) } className="btn btn-primary" role="button">Watch</a> <a href="#" className="btn btn-default" role="button">Button</a></p>
+				        <p><a onClick={()=>this.props.history.push({pathname: '/movie',state: {id: item.id,name: item.name} }) } className="btn btn-primary" role="button">Watch</a> <a href="#" className="btn btn-default" role="button">Download</a></p>
 				    </div>
 			    </div>
 		  	</div>
-		  	
-		  	</div>
+	</div>
 			)
       	}
+		
       	</div>
       
     )

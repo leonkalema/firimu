@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import 'bootstrap/dist/css/bootstrap.css'
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
@@ -8,6 +8,7 @@ import Dashboard from './protected/Dashboard'
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import WatchMovie from './protected/watchMovie';
+import Katemba from './protected/Katemba';
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -66,23 +67,26 @@ export default class App extends Component {
     this.removeListener()
   }
   render() {
-    return this.state.loading === true ? <h1>Loading</h1> : (
+    return this.state.loading === true ? <h1>Lindako katono nyo .....</h1> : (
       <BrowserRouter>
         <div>
-          <nav className="navbar navbar-default navbar-static-top">
-            <div className="container">
-              <div className="navbar-header">
-                <Link to="/" className="navbar-brand">React Router + Firebase Auth</Link>
-              </div>
-              <ul className="nav navbar-nav pull-right">
-                <li>
-                  <Link to="/" className="navbar-brand">Home</Link>
-                </li>
+      
+<Navbar inverse collapseOnSelect>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <Link to="/" className="navbar-brand">Firimu256.com</Link>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    </Navbar.Header>
+    <Navbar.Collapse>
+      <Nav>
+		
+		 <Link to="/katemba" className="navbar-brand">Katemba</Link>
 	
-                <li>
-                  <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
-                </li>
-                <li>
+        </Nav>
+      <Nav pullRight>
+		<Link to="/dashboard" className="navbar-brand">Uploadinga Movie</Link>
+<li>
                   {this.state.authed
                     ? <button
                         style={{border: 'none', background: 'transparent'}}
@@ -95,9 +99,10 @@ export default class App extends Component {
                         <Link to="/register" className="navbar-brand">Register</Link>
                       </span>}
                 </li>
-              </ul>
-            </div>
-          </nav>
+       
+      </Nav>
+    </Navbar.Collapse>
+  </Navbar>
           <div className="container">
             <div className="row">
               <Switch>
@@ -106,6 +111,7 @@ export default class App extends Component {
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
                 <MovieRoute authed={this.state.authed} path='/movie' component={WatchMovie} />
+                <PrivateRoute authed={this.state.authed} path='/katemba' component={Katemba} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>
