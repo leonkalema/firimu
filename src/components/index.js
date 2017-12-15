@@ -81,7 +81,7 @@ export default class App extends Component {
     <Navbar.Collapse>
       <Nav>
 		
-		 <Link to="/katemba" className="navbar-brand">Katemba</Link>
+	
 	
         </Nav>
       <Nav pullRight>
