@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import AddFile from './AddFile'; 
+import ListMovies from './ListMovies';
+
 
 
 class Dashboard extends Component {
@@ -10,11 +12,11 @@ class Dashboard extends Component {
     render() {
         return (
           <div>
-          <AddFile />
 			
-			Some Extra how to component
-
-          </div>  
+          <AddFile />
+			<ListMovies />
+		
+	 </div>  
         );
     }
 }

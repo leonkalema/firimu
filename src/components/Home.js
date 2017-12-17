@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
+
 export default class Home extends Component {
   constructor(props){
   	super(props);
@@ -17,7 +18,7 @@ export default class Home extends Component {
   componentWillMount() {
   	let files = [];
   	axios.get('https://api.openload.co/1/file/listfolder?login=f6dd2f2d3981418f&key=u8Rphwnk')
-        // axios.post('https://api.openload.co/1/remotedl/add?login=f6dd2f2d3981418f&key=u8Rphwnk&url=https://1fiafqj.oloadcdn.net/uls/9RSFoiH4yqNLNfWN&folder=1828583')
+        // axios.post('https://api.openload.co/1/file/getsplash?login={login}&key={key}&file={file}')
         .then(res => {
                 
             let filesArray = res.data.result.files;
@@ -63,17 +64,18 @@ export default class Home extends Component {
     <div>
       <input type="text" onChange={(e)=>this.search(e)} className="form-control" placeholder="Search here"/>
       <br />
+	
       {
       		this.state.files.reverse().map((item,j )=>
       		<div key={j} >
       	
 			<div className="col-sm-6 col-md-4"  >
 			    <div className="thumbnail">
-			      	<img src={require("./placeholder.png")}/>
+			      	<img src={require("./placeholder.png")} onClick={()=>this.props.history.push({pathname: '/movie',state: {id: item.id,name: item.name} }) }/>
 				    <div className="caption">
 				        <h3>{item.name}</h3>
-				        <p>Description about movie</p>
-				        <p><a onClick={()=>this.props.history.push({pathname: '/movie',state: {id: item.id,name: item.name} }) } className="btn btn-primary" role="button">Watch</a> <a href="#" className="btn btn-default" role="button">Download</a></p>
+				        <p>Shared by:  Coming Soon</p>
+				        <p><a onClick={()=>this.props.history.push({pathname: '/movie',state: {id: item.id,name: item.name} }) } className="btn btn-default" role="button">Watch</a> <a href="#" className="btn btn-default" role="button">Download</a></p>
 				    </div>
 			    </div>
 		  	</div>

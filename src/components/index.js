@@ -74,7 +74,7 @@ export default class App extends Component {
 <Navbar inverse collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to="/" className="navbar-brand">Firimu256.com</Link>
+   <img src={require("./logo-2.png")} />
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
