@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import GoogleAd from './protected/GoogleAd';
+import RapidAPI from 'rapidapi-connect';
 import 'bootstrap/dist/css/bootstrap.css';
+
+const style = {
+  marginTop: '15px',
+  marginBottom: '20px'
+};
 
 export default class Katemba extends Component {
   constructor(props){
@@ -16,14 +23,21 @@ export default class Katemba extends Component {
   }
   componentWillMount() {
   	let files = [];
-  	axios.get('https://api.openload.co/1/file/listfolder?login=f6dd2f2d3981418f&key=u8Rphwnk&folderid=4624380')
-        // axios.post('https://api.openload.co/1/remotedl/add?login=f6dd2f2d3981418f&key=u8Rphwnk&url=https://1fiafqj.oloadcdn.net/uls/9RSFoiH4yqNLNfWN&folder=1828583')
-        .then(res => {
-                
-            let filesArray = res.data.result.files;
-			let foldersArray = res.data.result.folders;
+      const rapid = new RapidAPI("default-application_595245eae4b058a9cb03885f", "700d35ff-99ec-4b4f-9b68-a4c61ee74789");
+
+
+      rapid.call('Openload', 'showFoldersContent', {
+          'login': 'f6dd2f2d3981418f',
+          'key': 'u8Rphwnk',
+          'folderId': '4624380',
+      }).on('success', res => {
+  	// axios.get('https://rapidapi.com/package/Openload/functions/showFoldersContent?login=f6dd2f2d3981418f&key=u8Rphwnk')
+        // axios.post('https://api.openload.co/1/file/getsplash?login={login}&key={key}&file={file}')
+          console.log(res);
+          console.log(filesArray);
+            let filesArray = res.result.files;
+			let foldersArray = res.result.folders;
             var {files, folders, tempFiles} = this.state;
-			console.log(foldersArray)
 			for (var i = 0; i < foldersArray.length; i++) {
 				folders.push(foldersArray[i]);
 			}
@@ -34,7 +48,7 @@ export default class Katemba extends Component {
 		    }
 		    this.setState({files,folders, loaded:true});
 
-            }).catch(error => {
+            }).on('error', error => {
                 console.log(error)
         });
      
@@ -63,17 +77,18 @@ export default class Katemba extends Component {
     <div>
       <input type="text" onChange={(e)=>this.search(e)} className="form-control" placeholder="Search here"/>
       <br />
+		
       {
       		this.state.files.reverse().map((item,j )=>
       		<div key={j} >
       	
 			<div className="col-sm-6 col-md-4"  >
 			    <div className="thumbnail">
-			      	<img src={require("../placeholder.png")}/>
+			      	<img src={require("./placeholder.png")} onClick={()=>this.props.history.push({pathname: '/movie',state: {id: item.id,name: item.name} }) }/>
 				    <div className="caption">
 				        <h3>{item.name}</h3>
-				        <p>Description about movie</p>
-				        <p><a onClick={()=>this.props.history.push({pathname: '/movie',state: {id: item.id,name: item.name} }) } className="btn btn-primary" role="button">Watch</a> <a href="#" className="btn btn-default" role="button">Download</a></p>
+				        <p>Shared by:  Coming Soon</p>
+				        <p><a onClick={()=>this.props.history.push({pathname: '/movie',state: {id: item.id,name: item.name} }) } className="btn btn-default" role="button">Watch</a> <a href="#" className="btn btn-default" role="button">Download</a></p>
 				    </div>
 			    </div>
 		  	</div>

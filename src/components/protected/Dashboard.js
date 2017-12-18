@@ -14,7 +14,6 @@ class Dashboard extends Component {
           <div>
 			
           <AddFile />
-			<ListMovies />
 		
 	 </div>  
         );

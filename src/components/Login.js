@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { login, resetPassword } from '../helpers/auth'
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 
 function setErrorMsg(error) {
   return {
@@ -42,8 +44,11 @@ export default class Login extends Component {
               &nbsp;{this.state.loginMessage} <a href="#" onClick={this.resetPassword} className="alert-link">Forgot Password?</a>
             </div>
           }
-          <button type="submit" className="btn btn-primary">Login</button>
-        </form>
+          <button type="submit" className="btn btn-primary">Login</button> 
+
+        </form> 
+
+<Link to="/register" className="navbar-brand"> <span className="glyphicon glyphicon-pencil" /> Free Registration  </Link>
       </div>
     )
   }

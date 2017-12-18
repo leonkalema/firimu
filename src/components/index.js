@@ -8,7 +8,8 @@ import Dashboard from './protected/Dashboard'
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import WatchMovie from './protected/watchMovie';
-import Katemba from './protected/Katemba';
+import Katemba from './Katemba';
+import Dmca from './Dmca';
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -42,6 +43,7 @@ function PublicRoute ({component: Component, authed, ...rest}) {
     />
   )
 }
+
 
 export default class App extends Component {
   state = {
@@ -80,12 +82,22 @@ export default class App extends Component {
     </Navbar.Header>
     <Navbar.Collapse>
       <Nav>
-		
+	   <NavDropdown eventKey="4" title="Categories" id="nav-dropdown">
+          <MenuItem eventKey="4.1"> <Link to="/katemba" className="navbar-brand">Katemba</Link></MenuItem>
+		  <MenuItem eventKey="4.1"> <Link to="/katemba" className="navbar-brand">Omugere / Action</Link></MenuItem>
+		  <MenuItem eventKey="4.1"> <Link to="/katemba" className="navbar-brand">Omukwano</Link></MenuItem>
+		  <MenuItem eventKey="4.1"> <Link to="/katemba" className="navbar-brand">Obukanga / Horror</Link></MenuItem>
+		  <MenuItem eventKey="4.1"> <Link to="/katemba" className="navbar-brand">Kina-Uganda</Link></MenuItem>
+         
+          
+        </NavDropdown>	
 	
 	
         </Nav>
       <Nav pullRight>
-		<Link to="/dashboard" className="navbar-brand">Uploadinga Movie</Link>
+		<Link to="/" className="navbar-brand"> <span className="glyphicon glyphicon-home" /> Watch  </Link>
+		<Link to="/dashboard" className="navbar-brand"><span className="glyphicon glyphicon-cloud-upload" /> Upload </Link>
+	 <Link to="/dmca" className="navbar-brand">DMCA</Link>
 <li>
                   {this.state.authed
                     ? <button
@@ -107,12 +119,13 @@ export default class App extends Component {
             <div className="row">
               <Switch>
                 <Route path='/' exact component={Home} />
-                <PublicRoute authed={this.state.authed} path='/login' component={Login} />
-                <PublicRoute authed={this.state.authed} path='/register' component={Register} />
-                <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
-                <MovieRoute authed={this.state.authed} path='/movie' component={WatchMovie} />
-                <PrivateRoute authed={this.state.authed} path='/katemba' component={Katemba} />
-                <Route render={() => <h3>No Match</h3>} />
+                 <Route path="/katemba" component={Katemba}/>
+                 <Route path='/dmca' component={Dmca} />
+                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
+                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
+                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
+                 <MovieRoute authed={this.state.authed} path='/movie' component={WatchMovie} />
+                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>
           </div>
