@@ -1,0 +1,17 @@
+{
+  "summary": {
+    "owner": "Leon Kalema",
+    "title": "User authentication"
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "Login Flow",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ],
+    "reviewer": "Martin Belak"
+  }
+}
